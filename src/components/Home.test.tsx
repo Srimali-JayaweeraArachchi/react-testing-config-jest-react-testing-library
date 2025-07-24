@@ -64,3 +64,31 @@ describe("Combine promise response values", () => {
     expect(response).not.toEqual({ value: "abcd" });
   });
 });
+
+describe("Testing Home component", () => {
+  beforeEach(() => {
+    render(<Home />);
+  }); //we do not render Home component in every test, we render it once before each test
+
+  it("renders a heading", () => {
+    // render(<Home />);
+    const text = screen.getByText(/Home/i);
+    expect(text).toBeInTheDocument(); //document mean in the Dom
+  });
+
+  it("renders a heading inside h1", () => {
+    // render(<Home />);
+    const text = screen.getByRole("heading", { level: 1 });
+    expect(text).toBeInTheDocument();
+  });
+
+  it("renders a description", () => {
+    const description = screen.getByTestId("description");
+    expect(description).toBeInTheDocument();
+  });
+
+  it("test the description", () => {
+    const text = screen.getByTestId("description");
+    expect(text.textContent).toMatch(/description/);
+  });
+});
